@@ -4,3 +4,6 @@
 .vscode/
 .env
 local.py
+static/*
+!static/.gitkeep
+my_database
