@@ -23,30 +23,37 @@ storages-down:
 storages-logs:
 	${LOGS} ${DB_CONTAINER} -f
 
+# Создаёт приложение
 .PHONY: app
 app:
 	${DC} -f ${APP_FILE} ${ENV} -f ${STORAGES_FILE} ${ENV} up --build -d
 
+# Способ чтобы увидеть терминал-логи приложение
 .PHONY: app-logs
 app-logs:
 	${LOGS} ${APP_CONTAINER} -f
 
+# Способ чтобы выключить/удалить приложение и бд
 .PHONY: app-down
 app-down:
 	${DC} -f ${APP_FILE} -f ${STORAGES_FILE} down
 
+# Миграция джанго-приложение
 .PHONY: migrate
 migrate:
 	${EXEC} ${APP_CONTAINER} ${MANAGE_FILE} migrate
 
+# Сделать миграцию
 .PHONY: migrations
 migrations:
 	${EXEC} ${APP_CONTAINER} ${MANAGE_FILE} makemigrations
 
+# Создать сюперюзера
 .PHONY: superuser
 superuser:
 	${EXEC} ${APP_CONTAINER} ${MANAGE_FILE} createsuperuser
 
+# Создание папки для того чтобы увидеть статичный сайт
 .PHONY: collect-static
 collect-static:
 	${EXEC} ${APP_CONTAINER} ${MANAGE_FILE} collectstatic
