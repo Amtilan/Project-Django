@@ -1,5 +1,6 @@
 from django.db import models
 from core.apps.common.models import TimeBaseModel
+from core.apps.products.entities.products import Product as ProductEntity
 
 
 class Product(TimeBaseModel):
@@ -18,6 +19,15 @@ class Product(TimeBaseModel):
         verbose_name = 'Виден ли товар в каталоге',
     )
     
+    def to_entity(self) -> ProductEntity:
+        return ProductEntity(
+            id=self.pk,
+            title=self.title,
+            description=self.description,
+            created_at=self.created_at,
+            updated_at=self.updated_at,
+        )
+        
     def __str__(self) -> str:
         return self.title
     

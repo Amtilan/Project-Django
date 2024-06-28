@@ -1,11 +1,23 @@
-import datetime
-from pydantic import BaseModel
+from datetime import datetime
+from typing import Any, Generic, TypeVar
+from pydantic import BaseModel, Field
+from core.apps.products.entities.products import Product as ProductEntity
+
+
 
 class ProductSchema(BaseModel):
+    id: int 
     title : str
-    descreption : str
-    created_at : datetime.datetime
-    updated_at : datetime.datetime | None = None
+    description : str
+    created_at : datetime 
+    updated_at: datetime
     
-ProductListSchema = list[ProductSchema]
-    
+    @staticmethod
+    def from_entity(entity: ProductEntity) -> 'ProductSchema':
+        return ProductSchema(
+            id=entity.id,
+            title=entity.title,
+            description=entity.description,
+            created_at=entity.created_at,
+            updated_at=entity.updated_at,
+        )

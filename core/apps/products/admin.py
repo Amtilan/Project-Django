@@ -9,4 +9,5 @@ class ProductAdmin(admin.ModelAdmin):
         'description',
         'created_at',
         'updated_at',
+        'is_visible',
     )

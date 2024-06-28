@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='id')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Время создания')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Время обновление')),
                 ('title', models.CharField(max_length=255, verbose_name='Название товара')),
