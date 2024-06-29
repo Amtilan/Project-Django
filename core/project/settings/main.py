@@ -1,17 +1,19 @@
 from pathlib import Path
+
 import environ
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-env = environ.Env()
+
+BASE_DIR=Path(__file__).resolve().parent.parent.parent.parent
+env=environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='secret')
+SECRET_KEY=env('DJANGO_SECRET_KEY', default='secret')
 
-DEBUG = False
+DEBUG=False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=[]
 
-INSTALLED_APPS = [
+INSTALLED_APPS=[
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -20,10 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # First Party
-    'core.apps.products.apps.ProductsConfig'
+    'core.apps.products.apps.ProductsConfig',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE=[
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -33,9 +35,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'core.project.urls'
+ROOT_URLCONF='core.project.urls'
 
-TEMPLATES = [
+TEMPLATES=[
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
@@ -51,9 +53,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.project.wsgi.application'
+WSGI_APPLICATION='core.project.wsgi.application'
 
-DATABASES = {
+DATABASES={
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': env("POSTGRES_DB"),
@@ -61,10 +63,10 @@ DATABASES = {
         'PASSWORD': env("POSTGRES_PASSWORD"),
         'HOST': env("POSTGRES_HOST"),
         'PORT': env("POSTGRES_PORT"),
-    }
+    },
 }
 
-AUTH_PASSWORD_VALIDATORS = [
+AUTH_PASSWORD_VALIDATORS=[
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
@@ -79,15 +81,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE='ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE='Europe/Moscow'
 
-USE_I18N = True
+USE_I18N=True
 
-USE_TZ = True
+USE_TZ=True
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL='static/'
+STATIC_ROOT=BASE_DIR / 'static'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'

@@ -1,15 +1,15 @@
 from datetime import datetime
-from typing import Any, Generic, TypeVar
-from pydantic import BaseModel, Field
-from core.apps.products.entities.products import Product as ProductEntity
 
+from pydantic import BaseModel
+
+from core.apps.products.entities.products import Product as ProductEntity
 
 
 class ProductSchema(BaseModel):
     id: int 
-    title : str
-    description : str
-    created_at : datetime 
+    title: str
+    description: str
+    created_at: datetime 
     updated_at: datetime
     
     @staticmethod

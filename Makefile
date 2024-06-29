@@ -1,12 +1,12 @@
-DC = docker compose
-STORAGES_FILE = docker_compose\storages.yaml
-EXEC = docker exec -it
-DB_CONTAINER = postgres_db
-ENV = --env-file .env
-LOGS = docker logs
-MANAGE_FILE = python manage.py
-APP_FILE = docker_compose\app.yaml
-APP_CONTAINER = main-app
+DC=docker compose
+STORAGES_FILE=docker_compose\storages.yaml
+EXEC=docker exec -it
+DB_CONTAINER=postgres_db
+ENV=--env-file .env
+LOGS=docker logs
+MANAGE_FILE=python manage.py
+APP_FILE=docker_compose\app.yaml
+APP_CONTAINER=main-app
 
 #Для того чтобы создать в докере psql
 .PHONY: storages

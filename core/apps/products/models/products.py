@@ -1,22 +1,23 @@
 from django.db import models
+
 from core.apps.common.models import TimeBaseModel
 from core.apps.products.entities.products import Product as ProductEntity
 
 
 class Product(TimeBaseModel):
-    title = models.CharField(
-        max_length = 255,
-        verbose_name = 'Название товара'
-    )
-    description = models.TextField(
+    title=models.CharField(
         max_length=255,
-        blank = True,
-        default = '',
-        verbose_name = 'Описание товара'
+        verbose_name='Название товара',
     )
-    is_visible = models.BooleanField(
-        default = True,
-        verbose_name = 'Виден ли товар в каталоге',
+    description=models.TextField(
+        max_length=255,
+        blank=True,
+        default='',
+        verbose_name='Описание товара',
+    )
+    is_visible=models.BooleanField(
+        default=True,
+        verbose_name='Виден ли товар в каталоге',
     )
     
     def to_entity(self) -> ProductEntity:
@@ -32,5 +33,5 @@ class Product(TimeBaseModel):
         return self.title
     
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name='Товар'
+        verbose_name_plural='Товары'
