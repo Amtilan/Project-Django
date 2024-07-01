@@ -1,5 +1,9 @@
 import pytest
-from core.apps.products.services.products import BaseProductService,ORMProductService
+
+from core.apps.products.services.products import (
+    BaseProductService,
+    ORMProductService,
+)
 
 
 @pytest.fixture

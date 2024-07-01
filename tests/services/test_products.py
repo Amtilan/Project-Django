@@ -1,7 +1,7 @@
 import pytest
-from core.api.filters import PaginationIN
 from tests.factories.products import ProductModelFactory
 
+from core.api.filters import PaginationIN
 from core.api.v1.products.filters import ProductFilters
 from core.apps.products.services.products import BaseProductService
 
