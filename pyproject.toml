@@ -6,28 +6,34 @@ authors=["Amtilan <149930972+Amtilan@users.noreply.github.com>"]
 readme="README.md"
 
 [tool.poetry.dependencies]
-python="^3.12"
-django="^5.0.6"
-psycopg2="^2.9.9"
-django-environ="^0.11.2"
-django-ninja="^1.1.0"
+python = "^3.11"
+django = "^5.0"
+psycopg2 = "^2.9.9"
+django-environ = "^0.11.2"
+django-ninja = "^1.1.0"
+punq = "^0.7.0"
+elastic-apm = "^6.21.3"
+orjson = "^3.9.15"
+httpx = "^0.27.0"
 
 
 [tool.poetry.group.dev.dependencies]
-isort="^5.13.2"
-pre-commit="^3.7.1"
-faker="^26.0.0"
-pytest="^8.2.2"
-pytest-django="^4.8.0"
-factory-boy="^3.3.0"
+isort = "^5.13.2"
+pre-commit = "^3.6.0"
+faker = "^22.6.0"
+pytest = "^8.0.0"
+pytest-django = "^4.8.0"
+factory-boy = "^3.3.0"
+
 
 [build-system]
-requires=["poetry-core"]
-build-backend="poetry.core.masonry.api"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE="core.project.settings.local"
+DJANGO_SETTINGS_MODULE = "core.project.settings.local"
+
 
 [tool.isort]
 multi_line_output=3
@@ -43,9 +49,7 @@ combine_star=true
 skip_gitignore=true
 balanced_wrapping=true
 force_grid_wrap=2
-src_paths=[
-    "core", 
-]
+src_paths=["core", ]
 skip_glob=[
     ".git",
     ".idea",
@@ -53,10 +57,7 @@ skip_glob=[
     "venv",
     ".venv",
 ]
-known_django=[
-    "django",
-    "ninja"
-]
+known_django=["django","ninja"]
 known_first_party=["core"]
 sections=[
     "FUTURE",
@@ -66,4 +67,3 @@ sections=[
     "FIRSTPARTY",
     "LOCALFOLDER",
 ]
-

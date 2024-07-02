@@ -12,7 +12,7 @@ APP_CONTAINER=main-app
 .PHONY: storages
 storages:
 	${DC} -f ${STORAGES_FILE} ${ENV} up -d
-
+	
 # Для того чтобы выключить/удалить БД(всё ещё не разобрался)
 .PHONY: storages-down
 storages-down:
