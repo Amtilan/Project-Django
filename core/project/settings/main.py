@@ -23,6 +23,7 @@ INSTALLED_APPS=[
     
     # First Party
     'core.apps.products.apps.ProductsConfig',
+    'core.apps.customers.apps.CustomersConfig',
 ]
 
 MIDDLEWARE=[

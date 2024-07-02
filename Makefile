@@ -58,7 +58,12 @@ superuser:
 collect-static:
 	${EXEC} ${APP_CONTAINER} ${MANAGE_FILE} collectstatic
 
-
+# Чтобы проверить программный код
 .PHONY: run-test
 run-test:
 	${EXEC} ${APP_CONTAINER} pytest
+
+# Чтобы зайти в терминал кода на докере
+.PHONY: cmd
+cmd:
+	${EXEC} ${APP_CONTAINER} bash
