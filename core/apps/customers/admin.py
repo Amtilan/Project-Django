@@ -6,4 +6,4 @@ from core.apps.customers.models import Customer
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
     list_display=('id','phone','created_at','updated_at')
-    search_fields=('phone', )
+    search_fields=('phone',)

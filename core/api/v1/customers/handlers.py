@@ -1,34 +1,19 @@
-from django.core.cache import cache
 from django.http import HttpRequest
-from ninja import (
-    Query,
-    Router,
-)
+from ninja import Router
 from ninja.errors import HttpError
 
-from core.api.filters import PaginationIN
-from core.api.schemas import (
-    ApiResponse,
-    ListPaginatedResponse,
-    PaginationOUT,
-)
+from core.api.schemas import ApiResponse
 from core.api.v1.customers.schemas import (
     AuthInSchema,
     AuthOutSchema,
     TokenCodeSchema,
     TokenInSchema,
 )
-from core.api.v1.products.filters import ProductFilters
-from core.api.v1.products.schemas import ProductSchema
 from core.apps.common.exception import ServiceException
 from core.apps.customers.services.auth import AuthService
 from core.apps.customers.services.codes import DjangoCacheCodeService
 from core.apps.customers.services.customers import ORMCustomerService
 from core.apps.customers.services.senders import DummySendersService
-from core.apps.products.services.products import (
-    BaseProductService,
-    ORMProductService,
-)
 
 
 router=Router(tags=['Customers'])
