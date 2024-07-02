@@ -15,6 +15,7 @@ from core.api.v1.products.schemas import ProductSchema
 from core.apps.products.containers import get_container
 from core.apps.products.services.products import BaseProductService
 
+
 router=Router(tags=['Produts'])
 
 @router.get('', response=ApiResponse[ListPaginatedResponse[ProductSchema]])

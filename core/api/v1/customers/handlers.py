@@ -10,10 +10,7 @@ from core.api.v1.customers.schemas import (
     TokenInSchema,
 )
 from core.apps.common.exception import ServiceException
-from core.apps.customers.services.auth import AuthService, BaseAuthService
-from core.apps.customers.services.codes import DjangoCacheCodeService
-from core.apps.customers.services.customers import ORMCustomerService
-from core.apps.customers.services.senders import DummySendersService
+from core.apps.customers.services.auth import BaseAuthService
 from core.apps.products.containers import get_container
 
 

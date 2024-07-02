@@ -1,5 +1,6 @@
 from ninja import Schema
 
+
 class AuthInSchema(Schema):
     phone: str
     

@@ -8,4 +8,4 @@ class Product:
     title: str
     description: str
     created_at: datetime 
-    updated_at: datetime 
+    updated_at: datetime
