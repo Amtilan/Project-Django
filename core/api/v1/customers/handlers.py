@@ -38,7 +38,7 @@ def get_token_handler(
     except ServiceException as exception:
         raise HttpError(
             status_code=400, 
-            message=exception.message
+            message=exception.message,
         ) from exception
     
     
