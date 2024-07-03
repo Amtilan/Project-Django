@@ -35,9 +35,10 @@ def _initialize_container() -> punq.Container:
     container=punq.Container()
     
     
+
+    
+    # initialize services
     container.register(BaseProductService, ORMProductService)
-    
-    
     container.register(BaseCustomerService, ORMCustomerService)
     container.register(BaseCodeService, DjangoCacheCodeService)
     container.register(BaseSendersService, ComposeSendersService, sender_services=(

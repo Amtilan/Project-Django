@@ -12,9 +12,10 @@ from core.api.schemas import (
 )
 from core.api.v1.products.filters import ProductFilters
 from core.api.v1.products.schemas import ProductSchema
-from core.apps.products.containers import get_container
+from core.project.containers import get_container
 from core.apps.products.services.products import BaseProductService
 
+from core.apps.products.filters.products import ProductFilters as ProductFiltersEntity
 
 router=Router(tags=['Produts'])
 
@@ -25,8 +26,11 @@ def get_product_list_handler(
     pagination_in: Query[PaginationIN],
 ) -> ApiResponse[ListPaginatedResponse[ProductSchema]]:
     container=get_container()
-    service=container.resolve(BaseProductService)
-    product_list=service.get_Product_List(filters=filters, pagination=pagination_in)
+    service:BaseProductService=container.resolve(BaseProductService)
+    product_list=service.get_Product_List(
+        filters=ProductFiltersEntity(search=filters.search), 
+        pagination=pagination_in
+    )
     product_count=service.get_Product_Count(filters=filters)
     items=[ProductSchema.from_entity(abc) for abc in product_list]
     

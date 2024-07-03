@@ -11,7 +11,7 @@ from core.api.v1.customers.schemas import (
 )
 from core.apps.common.exception import ServiceException
 from core.apps.customers.services.auth import BaseAuthService
-from core.apps.products.containers import get_container
+from core.project.containers import get_container
 
 
 router=Router(tags=['Customers'])
@@ -22,7 +22,7 @@ def auth_handler(
     schema: AuthInSchema,
 ) -> ApiResponse[AuthOutSchema]:
     container=get_container()
-    service=container.resolve(BaseAuthService)
+    service: BaseAuthService=container.resolve(BaseAuthService)
     service.authorize(phone=schema.phone)
     return ApiResponse(data=AuthOutSchema(message=f'Code sended to: {schema.phone}'))
 
@@ -32,11 +32,14 @@ def get_token_handler(
     schema: TokenInSchema,
 ) -> ApiResponse[TokenCodeSchema]:
     container=get_container()
-    service=container.resolve(BaseAuthService)
+    service: BaseAuthService=container.resolve(BaseAuthService)
     try:
         token=service.confirm(code=schema.code, phone=schema.phone)
     except ServiceException as exception:
-        raise HttpError(status_code=400, message=exception.message) from exception
+        raise HttpError(
+            status_code=400, 
+            message=exception.message
+        ) from exception
     
     
     return ApiResponse(data=TokenCodeSchema(token=token))
