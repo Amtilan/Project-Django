@@ -1,9 +1,12 @@
-from dataclasses import dataclass, field
-
+from dataclasses import (
+    dataclass,
+    field,
+)
 
 from core.apps.common.enum import EntityStatus
 from core.apps.customers.entities import CustomerEntity as Customer
 from core.apps.products.entities.products import Product
+
 
 @dataclass
 class Review():

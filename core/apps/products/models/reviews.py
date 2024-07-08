@@ -2,6 +2,7 @@ from django.db import models
 
 from core.apps.common.models import TimeBaseModel
 
+
 class ProductReview(TimeBaseModel):
     customer=models.ForeignKey(
         to='customers.Customer',
@@ -28,5 +29,5 @@ class ProductReview(TimeBaseModel):
         verbose_name='Product review'
         verbose_name_plural='Product reviews'
         unique_together=(
-            ('customer','product',),
+            ('customer','product'),
         )
