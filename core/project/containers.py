@@ -24,6 +24,13 @@ from core.apps.products.services.products import (
     BaseProductService,
     ORMProductService,
 )
+from core.apps.products.services.reviews import (
+    BaseReviewService,
+    BaseReviewValidatorService,
+    ComposedReviewValidatorService,
+    ORMReviewService,
+)
+from core.apps.products.use_cases.reviews.create import CreateReviewUseCase
 
 
 @lru_cache(1)
@@ -32,9 +39,6 @@ def get_container() -> punq.Container:
     
 def _initialize_container() -> punq.Container:
     container=punq.Container()
-    
-    
-
     
     # initialize services
     container.register(BaseProductService, ORMProductService)
@@ -48,5 +52,8 @@ def _initialize_container() -> punq.Container:
     )
     container.register(BaseAuthService, AuthService)
     
+    container.register(BaseReviewService, ORMReviewService)
+    container.register(BaseReviewValidatorService, ComposedReviewValidatorService, validators=[])
+    container.register(CreateReviewUseCase)
     
     return container

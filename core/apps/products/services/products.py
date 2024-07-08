@@ -8,6 +8,7 @@ from django.db.models import Q
 
 from core.api.filters import PaginationIN
 from core.apps.products.entities.products import Product
+from core.apps.products.exception.products import ProductIDNotFoundException
 from core.apps.products.filters.products import ProductFilters
 from core.apps.products.models.products import Product as ProductDTO
 
@@ -19,6 +20,10 @@ class BaseProductService(ABC):
             
     @abstractmethod
     def get_Product_Count(self, filters: ProductFilters) -> int:
+        ...
+        
+    @abstractmethod
+    def get_by_id(self, product_id: int) -> Product:
         ...
 
 
@@ -41,3 +46,10 @@ class ORMProductService(BaseProductService):
         query=self.__build_product_query(filters=filters)
         
         return ProductDTO.objects.filter(query).count()
+    
+    def get_by_id(self, product_id: int) -> Product:
+        try:
+            proruct_dto=ProductDTO.objects.get(pk=product_id)
+        except ProductDTO.DoesNotExist:
+            raise ProductIDNotFoundException(product_id=product_id)
+        return proruct_dto.to_entity()

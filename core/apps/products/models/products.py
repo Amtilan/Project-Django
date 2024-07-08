@@ -22,7 +22,7 @@ class Product(TimeBaseModel):
     
     def to_entity(self) -> ProductEntity:
         return ProductEntity(
-            id=self.pk,
+            id=self.id,
             title=self.title,
             description=self.description,
             created_at=self.created_at,

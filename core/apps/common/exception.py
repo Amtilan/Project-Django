@@ -6,3 +6,4 @@ class ServiceException(Exception):
     @property
     def message(self):
         return 'Application exception accessing'
+    
