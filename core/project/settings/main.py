@@ -102,7 +102,6 @@ STATIC_ROOT=BASE_DIR / 'static'
 DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
 
 
-
 ELASTIC_APM = {
     'SERVICE_NAME': 'reviews',
     'SERVER_URL': env('APM_URL', default='http://apm-server:8200'),
@@ -117,10 +116,8 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': (
-                '%(levelname)s %(asctime)s %(module)s %(process)d '
-                '%(thread)d %(message)s error_meta:\n%(error_meta)s'
-            ),
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d '
+                        '%(thread)d %(message)s error_meta:\n%(error_meta)s',
         },
     },
     'handlers': {
@@ -135,7 +132,18 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django.request': { 
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'mysite': {
+            'level': 'WARNING',
+            'handlers': ['elasticapm'],
+            'propagate': False,
+        },
+        # Log errors from the Elastic APM module to the console (recommended)
+        'elasticapm.errors': {
             'level': 'ERROR',
             'handlers': ['console'],
             'propagate': False,
