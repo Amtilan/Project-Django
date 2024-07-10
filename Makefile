@@ -7,6 +7,20 @@ LOGS=docker logs
 MANAGE_FILE=python manage.py
 APP_FILE=docker_compose\app.yaml
 APP_CONTAINER=main-app
+MONITOR_FILE=docker_compose\monitoring.yaml
+
+
+.PHONY: monitoring
+monitoring:
+	${DC} -f ${MONITOR_FILE} ${ENV} up --build -d
+
+.PHONY: monitoring-logs
+monitoring-logs:
+	${DC} -f ${MONITOR_FILE} ${ENV} logs -f
+
+.PHONY: monitoring-down
+monitoring-down:
+	${DC} -f ${MONITOR_FILE} down
 
 #Для того чтобы создать в докере psql
 .PHONY: storages

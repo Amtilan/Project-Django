@@ -1,7 +1,10 @@
 from functools import lru_cache
 
 import punq
-
+from logging import (
+    getLogger,
+    Logger,
+)
 from core.apps.customers.services.auth import (
     AuthService,
     BaseAuthService,
@@ -69,5 +72,6 @@ def _initialize_container() -> punq.Container:
     container.register(BaseReviewService, ORMReviewService)
     container.register(BaseReviewValidatorService, factory=build_validators)
     container.register(CreateReviewUseCase)
+    container.register(Logger, factory=getLogger, name='django.request')
     
     return container

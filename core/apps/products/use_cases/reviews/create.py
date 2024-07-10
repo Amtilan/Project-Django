@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from logging import Logger
 from core.apps.customers.services.customers import BaseCustomerService
 from core.apps.products.entities.reviews import Review as ReviewEntity
 from core.apps.products.services.products import BaseProductService
@@ -15,6 +15,7 @@ class CreateReviewUseCase:
     customer_service: BaseCustomerService
     product_service: BaseProductService
     validator_service: BaseReviewValidatorService
+    logger: Logger
     
     def execute(
         self, 
