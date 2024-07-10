@@ -20,7 +20,7 @@ class CreateReviewUseCase:
         self, 
         product_id: int, 
         customer_token: str, 
-        review: ReviewEntity
+        review: ReviewEntity,
     ) -> ReviewEntity:
         customer=self.customer_service.get_by_token(token=customer_token)
         product=self.product_service.get_by_id(product_id=product_id)

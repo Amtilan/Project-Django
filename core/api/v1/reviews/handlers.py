@@ -1,16 +1,12 @@
-from datetime import datetime
-
 from django.http import HttpRequest
 from ninja import (
     Header,
-    Query,
     Router,
 )
 from ninja.errors import HttpError
 
 from core.api.schemas import ApiResponse
 from core.api.v1.reviews.schemas import (
-    CreateReviewInSchema,
     ReviewInSchema,
     ReviewOutSchema,
 )
@@ -43,4 +39,3 @@ def create_review(
         )
     
     return ApiResponse(data=ReviewOutSchema.from_entity(review=result))
-    

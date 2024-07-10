@@ -1,5 +1,3 @@
-
-
 from dataclasses import dataclass
 
 from core.apps.common.exception import ServiceException
