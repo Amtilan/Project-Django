@@ -1,11 +1,14 @@
 from functools import lru_cache
-from django.conf import settings
-from httpx import Client
-import punq
 from logging import (
     getLogger,
     Logger,
 )
+
+from django.conf import settings
+
+import punq
+from httpx import Client
+
 from core.apps.common.clients.elasticsearch import ElasticClient
 from core.apps.customers.services.auth import (
     AuthService,
@@ -37,7 +40,10 @@ from core.apps.products.services.reviews import (
     ReviewRatingValidatorService,
     SingleReviewValidatorService,
 )
-from core.apps.products.services.search import BaseSearchProductService, ElasticSearchService
+from core.apps.products.services.search import (
+    BaseSearchProductService,
+    ElasticSearchService,
+)
 from core.apps.products.use_cases.reviews.create import CreateReviewUseCase
 from core.apps.products.use_cases.search.upsert_search_data import UpsertSearchDataUseCase
 

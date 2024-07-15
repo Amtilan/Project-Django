@@ -1,5 +1,7 @@
-
-from abc import ABC, abstractmethod
+from abc import (
+    ABC,
+    abstractmethod,
+)
 from dataclasses import dataclass
 
 from core.apps.common.clients.elasticsearch import ElasticClient

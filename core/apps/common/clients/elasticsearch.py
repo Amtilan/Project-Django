@@ -1,7 +1,7 @@
-
-
 from dataclasses import dataclass
+
 from httpx import Client
+
 
 @dataclass
 class ElasticClient:
@@ -13,6 +13,6 @@ class ElasticClient:
             json={
                 'doc': document,
                 'doc_as_upsert': True,
-            }
+            },
         )
         response.raise_for_status()
