@@ -9,6 +9,9 @@ APP_FILE=docker_compose\app.yaml
 APP_CONTAINER=main-app
 MONITOR_FILE=docker_compose\monitoring.yaml
 
+.PHONY: elasticsearch
+elasticsearch:
+	${EXEC} ${APP_CONTAINER} ${MANAGE_FILE} upsert_search_data
 
 .PHONY: monitoring
 monitoring:

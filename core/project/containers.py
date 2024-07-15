@@ -1,10 +1,12 @@
 from functools import lru_cache
-
+from django.conf import settings
+from httpx import Client
 import punq
 from logging import (
     getLogger,
     Logger,
 )
+from core.apps.common.clients.elasticsearch import ElasticClient
 from core.apps.customers.services.auth import (
     AuthService,
     BaseAuthService,
@@ -35,7 +37,9 @@ from core.apps.products.services.reviews import (
     ReviewRatingValidatorService,
     SingleReviewValidatorService,
 )
+from core.apps.products.services.search import BaseSearchProductService, ElasticSearchService
 from core.apps.products.use_cases.reviews.create import CreateReviewUseCase
+from core.apps.products.use_cases.search.upsert_search_data import UpsertSearchDataUseCase
 
 
 @lru_cache(1)
@@ -44,10 +48,25 @@ def get_container() -> punq.Container:
     
 def _initialize_container() -> punq.Container:
     
+    def build_validators() -> BaseReviewValidatorService:
+        return ComposedReviewValidatorService(
+            validators=[
+                container.resolve(SingleReviewValidatorService),
+                container.resolve(ReviewRatingValidatorService),
+            ],
+        )
+    
+    def build_elastic_search_service() -> BaseSearchProductService:
+        return ElasticSearchService(
+            client=ElasticClient(
+                http_client=Client(base_url=settings.ELASTIC_URL),
+            ),
+            index_name=settings.ELASTIC_PRODUCT_INDEX,
+        )
+
         
     container=punq.Container()
     
-    # initialize services
     container.register(BaseProductService, ORMProductService)
     container.register(BaseCustomerService, ORMCustomerService)
     container.register(BaseCodeService, DjangoCacheCodeService)
@@ -62,16 +81,12 @@ def _initialize_container() -> punq.Container:
     
     container.register(SingleReviewValidatorService)
     container.register(ReviewRatingValidatorService)
-    def build_validators() -> BaseReviewValidatorService:
-        return ComposedReviewValidatorService(
-            validators=[
-                container.resolve(SingleReviewValidatorService),
-                container.resolve(ReviewRatingValidatorService),
-            ],
-        )
     container.register(BaseReviewService, ORMReviewService)
     container.register(BaseReviewValidatorService, factory=build_validators)
     container.register(CreateReviewUseCase)
     container.register(Logger, factory=getLogger, name='django.request')
+    container.register(BaseSearchProductService, factory=build_elastic_search_service)
     
+    
+    container.register(UpsertSearchDataUseCase)
     return container

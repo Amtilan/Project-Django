@@ -16,7 +16,7 @@ class Customer(TimeBaseModel):
     token=models.CharField(
         verbose_name='Тикер для пользователя',
         max_length=255,
-        default=uuid4(),
+        default=uuid4,
         unique=True,
     )
     

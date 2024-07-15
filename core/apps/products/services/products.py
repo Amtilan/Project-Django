@@ -26,6 +26,9 @@ class BaseProductService(ABC):
     def get_by_id(self, product_id: int) -> Product:
         ...
 
+    @abstractmethod
+    def get_all_products(self) -> Iterable[Product]:
+        ...
 
 class ORMProductService(BaseProductService):
     def __build_product_query(self, filters: ProductFilters) -> Q:
@@ -53,3 +56,10 @@ class ORMProductService(BaseProductService):
         except ProductDTO.DoesNotExist:
             raise ProductIDNotFoundException(product_id=product_id)
         return proruct_dto.to_entity()
+    
+    def get_all_products(self) -> Iterable[Product]:
+        query=self.__build_product_query(filters=ProductFilters())
+        queryset=ProductDTO.objects.filter(query)
+        
+        for product in queryset:
+            yield product.to_entity()

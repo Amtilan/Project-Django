@@ -64,7 +64,7 @@ WSGI_APPLICATION='core.project.wsgi.application'
 
 DATABASES={
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': env("POSTGRES_DB"),
         'USER': env("POSTGRES_USER"),
         'PASSWORD': env("POSTGRES_PASSWORD"),
@@ -150,3 +150,6 @@ LOGGING = {
         },
     },
 }
+
+ELASTIC_URL = env('ELASTIC_URL')
+ELASTIC_PRODUCT_INDEX = env('ELASTIC_PRODUCT_INDEX', default='product-index')

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 from core.apps.common.models import TimeBaseModel
 from core.apps.products.entities.products import Product as ProductEntity
 
@@ -19,6 +19,11 @@ class Product(TimeBaseModel):
         default=True,
         verbose_name='Виден ли товар в каталоге',
     )
+    tags=ArrayField(
+        verbose_name='Теги товара',
+        default=list,
+        base_field=models.CharField(max_length=100),
+    )
     
     def to_entity(self) -> ProductEntity:
         return ProductEntity(
@@ -27,6 +32,7 @@ class Product(TimeBaseModel):
             description=self.description,
             created_at=self.created_at,
             updated_at=self.updated_at,
+            tags=self.tags,
         )
         
     def __str__(self) -> str:
