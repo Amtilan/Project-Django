@@ -1,6 +1,11 @@
 from django.http import HttpResponse
 from ninja.openapi.docs import DocsBase
-from typing_extensions import Annotated, Doc
+
+from typing_extensions import (
+    Annotated,
+    Doc,
+)
+
 
 scalar_theme = """
 /* basic theme */
@@ -109,7 +114,7 @@ def get_scalar_api_reference(
             The OpenAPI URL that Scalar should load and use.
             This is normally done automatically by Ninja using the default URL
             `/openapi.json`.
-            """
+            """,
         ),
     ],
     title: Annotated[
@@ -117,7 +122,7 @@ def get_scalar_api_reference(
         Doc(
             """
             The HTML `<title>` content, normally shown in the browser tab.
-            """
+            """,
         ),
     ],
     scalar_js_url: Annotated[
@@ -126,7 +131,7 @@ def get_scalar_api_reference(
             """
             The URL to use to load the Scalar JavaScript.
             It is normally set to a CDN URL.
-            """
+            """,
         ),
     ],
     scalar_proxy_url: Annotated[
@@ -135,7 +140,7 @@ def get_scalar_api_reference(
             """
             The URL to use to set the Scalar Proxy.
             It is normally set to a Scalar API URL (https://api.scalar.com/request-proxy), but default is empty # noqa: E501
-            """
+            """,
         ),
     ],
     scalar_favicon_url: Annotated[
@@ -143,7 +148,7 @@ def get_scalar_api_reference(
         Doc(
             """
             The URL of the favicon to use. It is normally shown in the browser tab. # noqa: E501
-            """
+            """,
         ),
     ],
     scalar_theme: Annotated[
@@ -151,7 +156,7 @@ def get_scalar_api_reference(
         Doc(
             """
             Custom CSS theme for Scalar.
-            """
+            """,
         ),
     ],
 ) -> HttpResponse:
